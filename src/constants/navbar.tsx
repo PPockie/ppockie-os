@@ -80,11 +80,11 @@ const DEFAULT_POSITION: NavPosition = "default";
  * slots (about, education, resume, contact) whatever position is stored.
  */
 const DOCK = {
-  nav: "max-lg:fixed max-lg:top-auto max-lg:bottom-4 max-lg:left-1/2 max-lg:-translate-x-1/2 max-lg:translate-y-0 max-lg:p-2.5",
-  div: "max-lg:grid max-lg:grid-cols-4 max-lg:gap-3",
+  nav: "max-lg:fixed max-lg:top-auto max-lg:bottom-4 max-lg:left-1/2 max-lg:-translate-x-1/2 max-lg:translate-y-0 max-lg:p-2.5 max-lg:w-[calc(100%-2rem)] md:max-lg:max-w-lg",
+  div: "max-lg:grid max-lg:w-full max-lg:grid-cols-[repeat(auto-fit,minmax(0,1fr))] max-lg:gap-3",
   ul: "max-lg:contents",
   logo: "max-lg:hidden",
-  item: "max-lg:w-14 md:max-lg:w-16",
+  item: "max-lg:w-full max-lg:aspect-auto max-lg:h-14 md:max-lg:h-16",
   hidden: "max-lg:hidden",
   only: "hidden max-lg:flex",
 } as const;
