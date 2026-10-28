@@ -58,7 +58,7 @@ const Folder = ({ item, onPress }: FolderProps) => {
           </span>
         </span>
 
-        <span className="text-sm font-medium" aria-hidden>
+        <span className="text-sm max-sm:text-xs font-medium whitespace-nowrap" aria-hidden>
           {chars.map((char, i) => (
             <span
               key={i}
