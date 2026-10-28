@@ -202,10 +202,6 @@ body {
 
   div {
     @apply flex items-center max-sm:w-full max-sm:justify-center gap-5;
-
-    &:last-child {
-      @apply max-sm:hidden;
-    }
   }
 
   ul {
