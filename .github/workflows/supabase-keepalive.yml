@@ -8,6 +8,7 @@ on:
 jobs:
   ping:
     runs-on: ubuntu-latest
+    environment: SUPABASE_URL
     steps:
       - name: Query contacts
         run: |
