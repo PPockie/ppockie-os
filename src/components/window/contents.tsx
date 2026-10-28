@@ -102,11 +102,11 @@ const AchievementCard = ({ achievement: a }: { achievement: Achievement }) => {
   return (
   <li
     onClick={() => setOpen(true)}
-    className="flex cursor-pointer items-start gap-5 rounded-xl border border-black/10 bg-black/5 p-4 text-left transition-colors hover:bg-black/10 dark:border-white/15 dark:bg-white/5 dark:hover:bg-white/10"
+    className="relative flex cursor-pointer items-start gap-5 max-sm:flex-col max-sm:items-stretch max-sm:gap-3 rounded-xl border border-black/10 bg-black/5 p-4 text-left transition-colors hover:bg-black/10 dark:border-white/15 dark:bg-white/5 dark:hover:bg-white/10"
   >
     <div
       aria-hidden
-      className="grid size-28 shrink-0 place-items-center overflow-hidden rounded-xl bg-neutral-900 text-neutral-50 dark:bg-neutral-50 dark:text-neutral-900 max-sm:size-20"
+      className="grid size-28 shrink-0 place-items-center overflow-hidden rounded-xl bg-neutral-900 text-neutral-50 dark:bg-neutral-50 dark:text-neutral-900 max-sm:h-40 max-sm:w-full"
     >
       {a.imageUrl ? (
         // eslint-disable-next-line @next/next/no-img-element -- remote host varies per achievement
@@ -132,7 +132,7 @@ const AchievementCard = ({ achievement: a }: { achievement: Achievement }) => {
       type="button"
       aria-haspopup="dialog"
       aria-label={a.title}
-      className="grid size-8 shrink-0 cursor-pointer place-items-center self-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2"
+      className="grid size-8 shrink-0 cursor-pointer place-items-center self-center max-sm:absolute max-sm:top-6 max-sm:right-6 max-sm:bg-neutral-50/80 max-sm:text-neutral-900 rounded-full focus-visible:outline-2 focus-visible:outline-offset-2"
     >
       <RiArrowRightSLine size={24} />
     </button>
@@ -181,7 +181,7 @@ const CopyButton = ({ value }: { value: string }) => {
       className="flex shrink-0 cursor-pointer items-center gap-1.5 rounded-lg border border-black/10 px-3 py-1.5 text-sm font-bold transition-colors hover:bg-black/10 focus-visible:outline-2 focus-visible:outline-offset-2 dark:border-white/15 dark:hover:bg-white/10"
     >
       {copied ? <RiCheckLine size={16} /> : <RiFileCopyLine size={16} />}
-      {copied ? t("copied") : t("copy")}
+      <span className="max-sm:sr-only">{copied ? t("copied") : t("copy")}</span>
     </button>
   );
 };
@@ -214,7 +214,7 @@ const ContactRowItem = ({ contact }: { contact: Contact }) => {
         {!isMail && <RiArrowRightUpLine size={20} aria-hidden className="ml-auto shrink-0 opacity-60" />}
       </a>
       {isMail && (
-        <div className="pr-4">
+        <div className="w-auto shrink-0 pr-4">
           <CopyButton value={value} />
         </div>
       )}
@@ -260,12 +260,12 @@ const SkillGroupFrame =({ group }: { group: SkillGroup }) => {
       onClick={expandable ? () => setExpanded((v) => !v) : undefined}
       className={cn(
         "relative mt-2 rounded-xl border border-black/10 bg-black/5 p-3 pt-5 dark:border-neutral-50",
-        expanded && "col-span-2",
+        expanded && "col-span-2 max-sm:col-span-1",
         expandable &&
           "cursor-pointer transition-colors hover:bg-black/5 dark:hover:bg-white/10",
       )}
     >
-      <h3 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-5xl font-noto-sans-thai font-bold text-black/10">
+      <h3 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-5xl whitespace-nowrap font-noto-sans-thai font-bold text-black/10">
         {expandable ? (
           <button
             type="button"
@@ -291,7 +291,7 @@ const SkillGroupFrame =({ group }: { group: SkillGroup }) => {
       <ul
         className={cn(
           "grid items-start gap-3",
-          expanded ? "grid-cols-4" : "grid-cols-2 grid-rows-2",
+          expanded ? "grid-cols-4 max-sm:grid-cols-2" : "grid-cols-2 grid-rows-2",
         )}
       >
         {shown.map((skill, i) => (
@@ -307,7 +307,7 @@ const SkillGroupFrame =({ group }: { group: SkillGroup }) => {
 export const SkillsContent = ({ groups }: { groups: SkillGroup[] }) => (
   <div className="block flex-1 overflow-auto p-4">
     {groups.length ? (
-      <div className="grid grid-flow-dense grid-cols-2 items-stretch gap-x-5 gap-y-6">
+      <div className="grid grid-flow-dense grid-cols-2 max-sm:grid-cols-1 items-stretch gap-x-5 gap-y-6">
         {groups.map((group) => (
           <SkillGroupFrame key={group.id} group={group} />
         ))}

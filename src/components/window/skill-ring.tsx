@@ -18,12 +18,11 @@ const arcColor = (percent: number) => {
 
 /** A circular progress chart with the percentage in the middle and the label below. */
 const SkillRing = ({ label, percent }: SkillRingProps) => (
-  <li className="flex min-w-24 flex-col items-center gap-2">
+  <li className="flex min-w-24 max-sm:min-w-0 flex-col items-center gap-2 max-sm:gap-1">
     <div
       role="img"
       aria-label={`${label} ${percent}%`}
-      className="relative"
-      style={{ width: SIZE, height: SIZE }}
+      className="relative size-22 max-sm:size-16"
     >
       <svg aria-hidden viewBox={`0 0 ${SIZE} ${SIZE}`} className="size-full -rotate-90 fill-none">
         <circle
@@ -46,12 +45,12 @@ const SkillRing = ({ label, percent }: SkillRingProps) => (
       </svg>
       <span
         aria-hidden
-        className="absolute inset-0 grid place-items-center text-lg font-bold"
+        className="absolute inset-0 grid place-items-center text-lg max-sm:text-sm font-bold"
       >
         {percent}%
       </span>
     </div>
-    <span className="text-center text-sm font-medium whitespace-nowrap">{label}</span>
+    <span className="text-center text-sm max-sm:text-[11px] font-medium whitespace-nowrap">{label}</span>
   </li>
 );
 
