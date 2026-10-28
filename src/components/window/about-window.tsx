@@ -135,9 +135,9 @@ const AboutWindow = ({ profile, skillGroups, projects, achievements, z, index, o
         </button>
       </div>
 
-      <div className="flex flex-1 flex-col items-stretch justify-between gap-6 p-8 text-left select-none">
+      <div className="flex flex-1 flex-col items-stretch justify-between gap-6 p-8 max-sm:gap-4 max-sm:p-4 text-left select-none">
         <div className="flex w-full items-center justify-start gap-8 max-sm:flex-col max-sm:text-center">
-          <div className="shrink-0 self-start rounded-full bg-rainbow-wave p-1.5">
+          <div className="w-fit shrink-0 self-start rounded-full bg-rainbow-wave p-1.5 max-sm:self-center">
             <div className="relative size-40 overflow-hidden rounded-full border-4 border-neutral-50 bg-neutral-900 dark:border-neutral-900 max-sm:size-32">
               <Image
                 draggable={false}
@@ -154,20 +154,20 @@ const AboutWindow = ({ profile, skillGroups, projects, achievements, z, index, o
             {/* <p className="text-4xl font-grapixoso font-bold">{t("handle")}</p> */}
             {profile && (
               <>
-                <p className="text-2xl font-bold whitespace-nowrap">{profile.fullName}</p>
+                <p className="text-2xl max-sm:text-xl font-bold whitespace-nowrap max-sm:whitespace-normal">{profile.fullName}</p>
                 <p className="text-base opacity-60">{t("username")}</p>
                 {(profile.bio ?? profile.headline) && <Bio text={(profile.bio ?? profile.headline)!} />}
               </>
             )}
 
-            <ul className="mt-3 grid w-full grid-cols-3 gap-3">
+            <ul className="mt-3 grid w-full grid-cols-3 items-stretch gap-3 max-sm:gap-2">
               {stats.map(({ key, value }) => (
                 <li
                   key={key}
-                  className="flex flex-col items-start px-4 rounded-xl bg-black/2 border border-black/10  py-3 dark:border-white/15"
+                  className="flex min-w-0 flex-col items-start px-4 max-sm:px-2.5 rounded-xl bg-black/2 border border-black/10  py-3 max-sm:py-2 dark:border-white/15"
                 >
-                  <span className="text-3xl font-bold">{value}</span>
-                  <span className="text-base opacity-60">{t(`stats.${key}`)}</span>
+                  <span className="text-3xl max-sm:text-2xl font-bold">{value}</span>
+                  <span className="max-w-full text-base max-sm:text-[11px] opacity-60">{t(`stats.${key}`)}</span>
                 </li>
               ))}
             </ul>

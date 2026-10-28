@@ -7,7 +7,7 @@ export default function LogoCircle() {
     h: 250,
   };
   return (
-    <div className="p-2 border-4 border-white rounded-full">
+    <div className="w-fit p-2 border-4 border-white rounded-full">
       <div className="w-80 aspect-square rounded-full bg-white flex justify-center items-center">
         <Image
           draggable={false}
