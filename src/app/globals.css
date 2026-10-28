@@ -1,26 +1,219 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 :root {
-  --background: #ffffff;
+  /* Edge of the square patch each corner decoration is drawn into. */
+  --decoration-size: 22rem;
+  /* Centre-to-centre spacing of the halftone grid. */
+  --decoration-gap: 0.85rem;
+
+  --decoration-arc-tl: radial-gradient(
+    circle var(--decoration-size) at 100% 100%,
+    transparent 0 100%,
+    #000 100%
+  );
+  --decoration-fade-tl: radial-gradient(
+    circle at 0 0,
+    #000 12%,
+    transparent 88%
+  );
+  --decoration-arc-br: radial-gradient(
+    circle var(--decoration-size) at 0 0,
+    transparent 0 100%,
+    #000 100%
+  );
+  --decoration-fade-br: radial-gradient(
+    circle at 100% 100%,
+    #000 12%,
+    transparent 88%
+  );
+}
+
+:root,
+:root[data-theme="light"] {
+  --background: #f9f9f9;
   --foreground: #171717;
+  --decoration-dot: #171717;
+}
+
+:root[data-theme="dark"] {
+  --background: #232323;
+  --foreground: #ededed;
+  --decoration-dot: #ededed;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+  --font-grapixoso: var(--font-grapixoso);
+  --font-grapixoso-condensada: var(--font-grapixoso-condensada);
+  --font-grapixoso-cubica: var(--font-grapixoso-cubica);
+  --font-noto-sans-thai: var(--font-noto-sans-thai);
+  --font-righteous: var(--font-righteous);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/*
+ * The logo disc and navbar sit above the intro's white cover, so they start
+ * hidden in CSS rather than waiting for the timeline after hydration. The
+ * logo's dark square is deliberately left visible.
+ */
+html:not([data-intro-done])
+  :is([data-intro="logo-face"], [data-intro="nav"], [data-intro="folders"]) {
+  opacity: 0;
+}
+
+h1,
+h2 {
+  font-family: var(--font-display);
+}
+
+/*
+ * Wave-rainbow background: an opaque pastel rainbow band that slides sideways,
+ * painting over the element's own background colour. The gradient repeats at
+ * 2x width, so shifting by one period loops seamlessly.
+ */
+@keyframes rainbow-wave {
+  to {
+    background-position: 200% 0;
+  }
+}
+
+/*
+ * Letters of a label are split into .wave-char spans (--i = index). On hover
+ * each one bobs with a staggered delay so a wave travels along the word.
+ */
+@keyframes text-wave {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.wave-char {
+  display: inline-block;
+  white-space: pre;
+}
+
+.group:is(:hover, :focus-visible) .wave-char {
+  animation: text-wave 0.9s ease-in-out infinite;
+  animation-delay: calc(var(--i) * -0.08s);
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+@keyframes window-pop {
+  from {
+    opacity: 0;
+    scale: 0.94;
+  }
+}
+
+.window-pop {
+  animation: window-pop 0.16s ease-out;
+}
+
+@utility bg-rainbow-wave {
+  background-image: linear-gradient(
+    100deg,
+    hsl(0 90% 72%),
+    hsl(50 95% 68%),
+    hsl(130 70% 65%),
+    hsl(190 90% 68%),
+    hsl(250 85% 74%),
+    hsl(310 85% 72%),
+    hsl(360 90% 72%)
+  );
+  background-size: 200% 100%;
+  animation: rainbow-wave 2.4s linear infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
   }
 }
 
 body {
+  width: 100dvw;
+  height: 100dvh;
+  overflow: hidden;
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+}
+
+@layer base {
+  img,
+  svg {
+    -webkit-user-drag: none;
+    user-select: none;
+  }
+
+  main {
+    width: 100dvw;
+    height: 100dvh;
+    overflow: hidden;
+    position: relative;
+    border: 8px solid #1b1b1b;
+    border-radius: 0.5rem;
+  }
+
+  main::before,
+  main::after {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    width: var(--decoration-size);
+    height: var(--decoration-size);
+    pointer-events: none;
+
+    background-image: radial-gradient(
+      circle closest-side,
+      var(--decoration-dot) 42%,
+      transparent 43%
+    );
+    background-size: var(--decoration-gap) var(--decoration-gap);
+
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    mask-composite: intersect;
+    -webkit-mask-composite: source-in;
+  }
+
+  main::before {
+    top: 0;
+    left: 0;
+    mask-image: var(--decoration-arc-tl), var(--decoration-fade-tl);
+    -webkit-mask-image: var(--decoration-arc-tl), var(--decoration-fade-tl);
+  }
+
+  main::after {
+    right: 0;
+    bottom: 0;
+    mask-image: var(--decoration-arc-br), var(--decoration-fade-br);
+    -webkit-mask-image: var(--decoration-arc-br), var(--decoration-fade-br);
+  }
+
+  div {
+    @apply flex items-center max-sm:w-full max-sm:justify-center gap-5;
+
+    &:last-child {
+      @apply max-sm:hidden;
+    }
+  }
+
+  ul {
+    @apply flex items-center gap-5 max-sm:hidden;
+
+    p {
+      @apply text-sm cursor-pointer hover:underline transition-all;
+    }
+  }
+
 }

@@ -1,0 +1,60 @@
+{
+  "Home": {
+    "title": "To get started, edit the page.tsx file.",
+    "notFound": "This page could not be found."
+  },
+  "Window": {
+    "close": "Close",
+    "empty": "Nothing here yet."
+  },
+  "Contact": {
+    "title": "Get in touch",
+    "intro": "Open to new opportunities and always happy to chat. Reach me on any of these.",
+    "copy": "Copy",
+    "copied": "Copied"
+  },
+  "Achievements": {
+    "position": "Position",
+    "tools": "Tools",
+    "prevImage": "Previous image",
+    "nextImage": "Next image",
+    "image": "Image {n} of {total}"
+  },
+  "About": {
+    "title": "About This PPockie",
+    "copyright": "© {year} PPockie. All rights reserved.",
+    "handle": "ppockie",
+    "username": "@ppockie.wrk",
+    "readMore": "Read more",
+    "readLess": "Show less",
+    "prev": "Previous skills",
+    "next": "Next skills",
+    "stats": {
+      "projects": "Projects",
+      "achievements": "Achievements",
+      "skills": "Skills"
+    }
+  },
+  "Timeline": {
+    "experience": "Experience",
+    "education": "Education",
+    "present": "Present",
+    "gpax": "GPAX"
+  },
+  "Documents": {
+    "resume": "Resume",
+    "cv": "CV",
+    "view": "View",
+    "download": "Download"
+  },
+  "Folders": {
+    "education": "Education",
+    "projects": "Projects",
+    "about": "About me",
+    "blogs": "Blogs",
+    "achievements": "Achievements",
+    "resume": "Resume",
+    "skills": "Skills",
+    "contact": "Contact"
+  }
+}
