@@ -28,6 +28,8 @@ interface OpenWindow {
 
 interface WindowContextValue {
   open: (id: string) => void;
+  /** Id of the window on top, the one the URL points at; null when none is open. */
+  activeId: string | null;
   /** A resume or CV is published, so the nav can offer the download. */
   hasDocuments: boolean;
 }
@@ -38,10 +40,10 @@ const BASE_Z = 100;
 
 const RESUME_WINDOW = { labelKey: RESUME_ID, icon: <RiFileUserFill /> };
 
-/** Same chrome as a folder window, titled from `Folders.education`. */
-const EDUCATION_WINDOW = { labelKey: EDUCATION_ID, icon: <RiGraduationCapFill /> };
 const SETTINGS_WINDOW = { labelKey: SETTINGS_ID, icon: <RiSettings3Fill /> };
 
+/** Same chrome as a folder window, titled from `Folders.education`. */
+const EDUCATION_WINDOW = { labelKey: EDUCATION_ID, icon: <RiGraduationCapFill /> };
 
 interface WindowProviderProps {
   children: React.ReactNode;
@@ -114,7 +116,8 @@ const WindowProvider = ({ children, projects, skillGroups, profile, achievements
   }, [windows, locale]);
 
   const hasDocuments = documents.length > 0;
-  const value = useMemo(() => ({ open, hasDocuments }), [open, hasDocuments]);
+  const activeId = windows.reduce<OpenWindow | null>((a, w) => (!a || w.z > a.z ? w : a), null)?.id ?? null;
+  const value = useMemo(() => ({ open, activeId, hasDocuments }), [open, activeId, hasDocuments]);
 
   return (
     <WindowContext.Provider value={value}>
@@ -163,9 +166,6 @@ const WindowProvider = ({ children, projects, skillGroups, profile, achievements
             </FolderWindow>
           );
         }
-        const item = FOLDERS.find((f) => f.id === id);
-          );
-        }
         if (id === SETTINGS_ID) {
           return (
             <FolderWindow
@@ -178,6 +178,9 @@ const WindowProvider = ({ children, projects, skillGroups, profile, achievements
             >
               <SettingsContent />
             </FolderWindow>
+          );
+        }
+        const item = FOLDERS.find((f) => f.id === id);
         return item ? (
           <FolderWindow
             key={id}

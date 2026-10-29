@@ -14,10 +14,12 @@ const splitGraphemes = (text: string) =>
 
 interface FolderProps {
   item: FolderItem;
+  /** Its window is on top, so the folder keeps the highlight it gets on hover. */
+  active?: boolean;
   onPress?: () => void;
 }
 
-const Folder = ({ item, onPress }: FolderProps) => {
+const Folder = ({ item, active, onPress }: FolderProps) => {
   const t = useTranslations("Folders");
   const label = t(item.labelKey);
   const chars = splitGraphemes(label);
@@ -42,13 +44,15 @@ const Folder = ({ item, onPress }: FolderProps) => {
             aria-hidden
             className={cn(
               "absolute -top-3 left-0 h-4 w-11 rounded-t-lg border-4 border-b-0 border-neutral-900 dark:border-neutral-50 group-hover:bg-rainbow-wave group-focus-visible:bg-rainbow-wave",
-              item.tone
+              item.tone,
+              active && "bg-rainbow-wave"
             )}
           />
           <span
             className={cn(
               "absolute inset-0 flex items-center justify-center rounded-xl rounded-tl-none border-4 border-neutral-900 dark:border-neutral-50 shadow-xl shadow-gray-800/25 group-hover:bg-rainbow-wave group-focus-visible:bg-rainbow-wave group-hover:text-neutral-900! group-focus-visible:text-neutral-900!",
-              item.tone
+              item.tone,
+              active && "bg-rainbow-wave text-neutral-900!"
             )}
           >
             {item.icon}

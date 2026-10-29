@@ -27,7 +27,7 @@ const LAYER = { backText: 15, frontText: 45 };
 const Welcome = () => {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
-  const { open } = useWindows();
+  const { open, activeId } = useWindows();
 
   useAnimation(titleRef, stretchText, { faces: "title" });
 
@@ -94,7 +94,7 @@ const Welcome = () => {
           className="absolute inset-0 z-20 pointer-events-none max-lg:grid max-lg:grid-cols-4 md:max-lg:grid-cols-6 max-lg:content-start max-lg:justify-items-center max-lg:gap-y-4 max-lg:px-4 max-lg:pt-10"
         >
           {FOLDERS.map((item) => (
-            <Folder key={item.id} item={item} onPress={() => open(item.id)} />
+            <Folder key={item.id} item={item} active={item.id === activeId} onPress={() => open(item.id)} />
           ))}
         </ul>
 
