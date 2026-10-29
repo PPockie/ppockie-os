@@ -25,10 +25,7 @@ const Folder = ({ item, onPress }: FolderProps) => {
   return (
     <li
       data-intro="folder"
-      className={cn(
-        "absolute -translate-x-1/2 -translate-y-1/2 pointer-events-auto max-lg:static max-lg:translate-none",
-        item.docked && "max-lg:hidden"
-      )}
+      className="absolute -translate-x-1/2 -translate-y-1/2 pointer-events-auto max-lg:static max-lg:translate-none"
       style={{ left: `${item.x}%`, top: `${item.y}%` }}
     >
       <button

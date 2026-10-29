@@ -20,8 +20,6 @@ export interface FolderItem {
   y: number;
   /** Resting tilt in degrees. */
   rotate: number;
-  /** Lives in the dock on tablet and mobile, so the icon grid skips it. */
-  docked?: boolean;
 }
 
 const ICON_SIZE = 32;
@@ -86,7 +84,6 @@ export const FOLDERS: FolderItem[] = [
     x: 84,
     y: 40,
     rotate: -4,
-    docked: true,
   },
 ];
 

@@ -1,7 +1,6 @@
 import {
   RiFileUserFill,
   RiGraduationCapFill,
-  RiMailFill,
   RiUserSmileFill,
 } from "@remixicon/react";
 import { ReactNode } from "react";
@@ -16,8 +15,6 @@ export interface NavListProps {
   href?: string;
   /** Opens the window with this id instead of following a link. */
   windowId?: string;
-  /** Only shown in the bottom dock on tablet and mobile. */
-  dockOnly?: boolean;
 }
 
 /** Id of the "About This Mac" style window; it isn't one of the desktop folders. */
@@ -76,8 +73,9 @@ export const NAV_POSITIONS = Object.keys(NAVBAR_VARIANT) as NavPosition[];
 const DEFAULT_POSITION: NavPosition = "default";
 
 /**
- * Below `lg` the nav becomes an iOS-style dock pinned to the bottom: four
- * slots (about, education, resume, contact) whatever position is stored.
+ * Below `lg` the nav becomes an iOS-style dock pinned to the bottom: three
+ * slots (about, education, resume) whatever position is stored. Contact
+ * moves to the folder grid there.
  */
 const DOCK = {
   nav: "max-lg:fixed max-lg:top-auto max-lg:bottom-4 max-lg:left-1/2 max-lg:-translate-x-1/2 max-lg:translate-y-0 max-lg:p-2.5 max-lg:w-[calc(100%-2rem)] md:max-lg:max-w-lg",
@@ -86,7 +84,6 @@ const DOCK = {
   logo: "max-lg:hidden",
   item: "max-lg:w-full max-lg:aspect-auto max-lg:h-14 md:max-lg:h-16",
   hidden: "max-lg:hidden",
-  only: "hidden max-lg:flex",
 } as const;
 
 export const NAVBAR = {
@@ -130,11 +127,3 @@ export const NAV_LIST: NavListProps[] = [
   },
 ];
 
-export const DOCK_CONTACT: NavListProps = {
-  id: "dock-contact",
-  name: "Contact",
-  category: "information",
-  icon: <RiMailFill size={ICON_SIZE} />,
-  windowId: "contact",
-  dockOnly: true,
-};

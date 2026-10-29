@@ -5,7 +5,6 @@ import Image from "next/image";
 import LOGO from "@/../public/images/logo.svg";
 import { Fragment, useRef } from "react";
 import {
-  DOCK_CONTACT,
   NAV_CONTACT_PLATFORMS,
   NAV_LIST,
   NAVBAR,
@@ -47,7 +46,7 @@ interface NavbarProps {
 const Navbar = ({ position, contacts = [] }: NavbarProps) => {
   const quickLinks = contacts.filter((c) => NAV_CONTACT_PLATFORMS.includes(c.platform.trim().toLowerCase()));
   const { open, hasDocuments } = useWindows();
-  const items = [...NAV_LIST.filter((n) => n.windowId !== RESUME_ID || hasDocuments), DOCK_CONTACT, ...quickLinks.map(toContactItem)];
+  const items = [...NAV_LIST.filter((n) => n.windowId !== RESUME_ID || hasDocuments), ...quickLinks.map(toContactItem)];
   const { position: stored } = useNavPosition();
   const active = position ?? stored;
   const NAV_VARIANT = NAVBAR_VARIANT[active];
@@ -85,7 +84,7 @@ const Navbar = ({ position, contacts = [] }: NavbarProps) => {
         </div>
 
         <ul ref={listRef} className={cn(NAV_VARIANT.ul, NAVBAR.dock.ul)}>
-          {items.map(({ id, name, icon, category, className, href, windowId, dockOnly }, index) => {
+          {items.map(({ id, name, icon, category, className, href, windowId }, index) => {
             const next = items[index + 1];
             const endsCategory =
               next !== undefined && next.category !== category;
@@ -103,7 +102,6 @@ const Navbar = ({ position, contacts = [] }: NavbarProps) => {
                     NAVBAR.style.item,
                     NAV_VARIANT.item,
                     NAVBAR.dock.item,
-                    dockOnly && NAVBAR.dock.only,
                     category === "contact" && NAVBAR.dock.hidden,
                     className
                   )}
