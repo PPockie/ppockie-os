@@ -102,7 +102,7 @@ const AchievementCard = ({ achievement: a }: { achievement: Achievement }) => {
   return (
   <li
     onClick={() => setOpen(true)}
-    className="relative flex cursor-pointer items-start gap-5 max-sm:flex-col max-sm:items-stretch max-sm:gap-3 rounded-xl border border-black/10 bg-black/5 p-4 text-left transition-colors hover:bg-black/10 dark:border-white/15 dark:bg-white/5 dark:hover:bg-white/10"
+    className="flex cursor-pointer items-start gap-5 max-sm:flex-col max-sm:items-stretch max-sm:gap-3 rounded-xl border border-black/10 bg-black/5 p-4 text-left transition-colors hover:bg-black/10 dark:border-white/15 dark:bg-white/5 dark:hover:bg-white/10"
   >
     <div
       aria-hidden
@@ -132,7 +132,7 @@ const AchievementCard = ({ achievement: a }: { achievement: Achievement }) => {
       type="button"
       aria-haspopup="dialog"
       aria-label={a.title}
-      className="grid size-8 shrink-0 cursor-pointer place-items-center self-center max-sm:absolute max-sm:top-6 max-sm:right-6 max-sm:bg-neutral-50/80 max-sm:text-neutral-900 rounded-full focus-visible:outline-2 focus-visible:outline-offset-2"
+      className="grid size-8 shrink-0 cursor-pointer place-items-center self-center max-sm:sr-only rounded-full focus-visible:outline-2 focus-visible:outline-offset-2"
     >
       <RiArrowRightSLine size={24} />
     </button>
