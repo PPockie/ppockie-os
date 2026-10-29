@@ -4,7 +4,8 @@ import { useState, useTransition } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { useRouter } from "@/i18n/navigation";
-import { SETTINGS_ID } from "@/constants/navbar";
+import { NAV_POSITIONS, SETTINGS_ID } from "@/constants/navbar";
+import { useNavPosition } from "@/components/nav/nav-provider";
 import AchievementModal from "@/components/window/achievement-modal";
 import FolderTile from "@/components/window/folder-tile";
 import SkillIcon from "@/components/skill-icon";
@@ -20,6 +21,7 @@ import {
   RiFileTextFill,
   RiFileCopyLine,
   RiGraduationCapFill,
+  RiLayoutLine,
   RiLinksLine,
   RiTranslate2,
   RiTrophyFill,
@@ -299,7 +301,44 @@ const LanguageRow = () => {
   );
 };
 
-/** Preferences as rows, the same layout as the contact list. */
+const NavPositionRow = () => {
+  const t = useTranslations("Settings");
+  const { position, setPosition } = useNavPosition();
+
+  return (
+    <li className="flex flex-wrap items-center gap-4 rounded-xl border border-black/10 bg-black/5 p-4 dark:border-white/15 dark:bg-white/5 max-lg:hidden">
+      <span
+        aria-hidden
+        className="grid size-12 shrink-0 place-items-center rounded-xl bg-gray-200 dark:bg-gray-700"
+      >
+        <RiLayoutLine size={24} />
+      </span>
+      <span className="flex min-w-0 flex-1 flex-col items-start">
+        <span className="text-lg font-bold">{t("navPosition")}</span>
+        <span className="text-sm opacity-60">{t("navPositionHint")}</span>
+      </span>
+      <div role="group" aria-label={t("navPosition")} className="flex shrink-0 gap-2">
+        {NAV_POSITIONS.map((p) => (
+          <button
+            key={p}
+            type="button"
+            aria-pressed={p === position}
+            onClick={() => setPosition(p)}
+            className={cn(
+              "cursor-pointer rounded-lg border px-3 py-1.5 text-sm font-bold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2",
+              p === position
+                ? "border-neutral-900 bg-neutral-900 text-neutral-50 dark:border-neutral-50 dark:bg-neutral-50 dark:text-neutral-900"
+                : "border-black/10 hover:bg-black/10 dark:border-white/15 dark:hover:bg-white/10",
+            )}
+          >
+            {t(`positions.${p}`)}
+          </button>
+        ))}
+      </div>
+    </li>
+  );
+};
+
 export const SettingsContent = () => {
   const t = useTranslations("Settings");
 
@@ -312,6 +351,7 @@ export const SettingsContent = () => {
         </div>
         <ul className="flex flex-col items-stretch gap-3">
           <LanguageRow />
+          <NavPositionRow />
         </ul>
       </div>
     </div>

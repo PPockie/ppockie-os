@@ -21,6 +21,13 @@
     "languages": {
       "en": "English",
       "th": "ไทย"
+    },
+    "navPosition": "Navbar position",
+    "navPositionHint": "Choose where the navbar sits on desktop.",
+    "positions": {
+      "default": "Left",
+      "top": "Top",
+      "bottom": "Bottom"
     }
   },
   "Achievements": {

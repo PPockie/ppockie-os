@@ -21,6 +21,13 @@
     "languages": {
       "en": "English",
       "th": "ไทย"
+    },
+    "navPosition": "ตำแหน่งแถบนำทาง",
+    "navPositionHint": "เลือกตำแหน่งแถบนำทางบนเดสก์ท็อป",
+    "positions": {
+      "default": "ซ้าย",
+      "top": "บน",
+      "bottom": "ล่าง"
     }
   },
   "Achievements": {
