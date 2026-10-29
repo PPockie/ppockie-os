@@ -265,7 +265,7 @@ const SkillGroupFrame =({ group }: { group: SkillGroup }) => {
           "cursor-pointer transition-colors hover:bg-black/5 dark:hover:bg-white/10",
       )}
     >
-      <h3 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-5xl whitespace-nowrap font-noto-sans-thai font-bold text-black/10">
+      <h3 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full px-2 text-center text-5xl max-sm:text-3xl leading-tight font-noto-sans-thai font-bold text-black/10">
         {expandable ? (
           <button
             type="button"
