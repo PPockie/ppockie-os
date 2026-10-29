@@ -237,13 +237,12 @@ export async function getDocument(kind: DocumentRow["kind"], locale: Locale) {
   const row = rows.find((r) => r.locale === locale) ?? rows[0];
   if (!row) return null;
 
-  const bucket = supabase.storage.from("media");
+  // Proxied through `/files` (see next.config.ts) so the Supabase host stays hidden.
+  const viewUrl = `/files/${row.file_path}`;
   return {
     kind,
     title: row.title,
-    viewUrl: bucket.getPublicUrl(row.file_path).data.publicUrl,
-    downloadUrl: bucket.getPublicUrl(row.file_path, {
-      download: row.download_name ?? true,
-    }).data.publicUrl,
+    viewUrl,
+    downloadUrl: `${viewUrl}?download=${encodeURIComponent(row.download_name ?? "")}`,
   };
 }
