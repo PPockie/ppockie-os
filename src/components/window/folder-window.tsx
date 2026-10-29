@@ -9,11 +9,9 @@ import { useDraggableWindow } from "@/hooks/use-draggable-window";
 interface FolderWindowProps {
   item: Pick<FolderItem, "labelKey" | "icon">;
   z: number;
-  /** Position in the open stack; used to cascade new windows. */
   index: number;
   onFocus: () => void;
   onClose: () => void;
-  /** Window body; falls back to the empty message when omitted. */
   children?: React.ReactNode;
 }
 

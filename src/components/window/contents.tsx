@@ -429,7 +429,6 @@ export const SkillsContent = ({ groups }: { groups: SkillGroup[] }) => (
   </div>
 );
 
-/** "2024-03-01" -> "Mar 2024" (or "มี.ค. 2567"); read as UTC so the day never slips into the previous month. */
 const formatMonth = (date: string, locale: string) =>
   new Intl.DateTimeFormat(locale, { month: "short", year: "numeric", timeZone: "UTC" }).format(new Date(date));
 
@@ -481,7 +480,7 @@ const TimelineSection = ({
               <span
                 aria-hidden
                 className={cn(
-                  "absolute top-1.5 -left-[8px] size-3.5 rounded-full border-2 border-neutral-50 bg-neutral-900 dark:border-neutral-900 dark:bg-neutral-50",
+                  "absolute top-1.5 -left-2 size-3.5 rounded-full border-2 border-neutral-50 bg-neutral-900 dark:border-neutral-900 dark:bg-neutral-50",
                   current && "bg-rainbow-wave dark:bg-rainbow-wave",
                 )}
               />
@@ -513,7 +512,6 @@ const TimelineSection = ({
   );
 };
 
-/** Experience and education as two vertical timelines, newest first, like the resume. */
 export const TimelineContent = ({
   experiences,
   education,

@@ -92,11 +92,6 @@ const Navbar = ({ position, contacts = [] }: NavbarProps) => {
 
             return (
               <Fragment key={id}>
-                {/*
-                 * cn() merges rather than concatenates, so an entry's own
-                 * `className` overrides the default tint instead of racing it
-                 * on source order.
-                 */}
                 <li
                   className={cn(
                     "group/item relative cursor-pointer p-2 aspect-square flex items-center justify-center",

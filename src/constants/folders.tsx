@@ -30,15 +30,6 @@ export const TONE = {
   dark: "bg-neutral-900 text-neutral-50",
 } as const;
 
-/**
- * Grouped by theme and split across the avatar.
- *
- * Left  - what I make and what I can do: projects, skills, achievements.
- * Right - how I share and how to reach me: blogs, contact.
- *
- * The left edge stays clear of the dock and the lower third stays clear of the
- * ring marquee.
- */
 export const FOLDERS: FolderItem[] = [
   {
     id: "projects",
