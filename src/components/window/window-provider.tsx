@@ -13,11 +13,11 @@ import { useLocale } from "next-intl";
 import { FOLDERS, WINDOW_IDS } from "@/constants/folders";
 import { INTRO_DONE_EVENT } from "@/components/ui/intro";
 import { routing } from "@/i18n/routing";
-import { RiFileUserFill, RiGraduationCapFill } from "@remixicon/react";
-import { ABOUT_ID, EDUCATION_ID, RESUME_ID } from "@/constants/navbar";
+import { RiFileUserFill, RiGraduationCapFill, RiSettings3Fill } from "@remixicon/react";
+import { ABOUT_ID, EDUCATION_ID, RESUME_ID, SETTINGS_ID } from "@/constants/navbar";
 import FolderWindow from "@/components/window/folder-window";
 import AboutWindow from "@/components/window/about-window";
-import { AchievementsContent, ContactContent, DocumentsContent, ProjectsContent, SkillsContent, TimelineContent } from "@/components/window/contents";
+import { AchievementsContent, ContactContent, DocumentsContent, ProjectsContent, SettingsContent, SkillsContent, TimelineContent } from "@/components/window/contents";
 import type { Achievement, Contact, DocumentLink, Education, Experience, Profile, Project, SkillGroup } from "@/libs/supabase/queries";
 
 interface OpenWindow {
@@ -40,6 +40,8 @@ const RESUME_WINDOW = { labelKey: RESUME_ID, icon: <RiFileUserFill /> };
 
 /** Same chrome as a folder window, titled from `Folders.education`. */
 const EDUCATION_WINDOW = { labelKey: EDUCATION_ID, icon: <RiGraduationCapFill /> };
+const SETTINGS_WINDOW = { labelKey: SETTINGS_ID, icon: <RiSettings3Fill /> };
+
 
 interface WindowProviderProps {
   children: React.ReactNode;
@@ -162,6 +164,20 @@ const WindowProvider = ({ children, projects, skillGroups, profile, achievements
           );
         }
         const item = FOLDERS.find((f) => f.id === id);
+          );
+        }
+        if (id === SETTINGS_ID) {
+          return (
+            <FolderWindow
+              key={id}
+              item={SETTINGS_WINDOW}
+              z={z}
+              index={index}
+              onFocus={() => focus(id)}
+              onClose={() => close(id)}
+            >
+              <SettingsContent />
+            </FolderWindow>
         return item ? (
           <FolderWindow
             key={id}

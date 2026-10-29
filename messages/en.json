@@ -13,6 +13,16 @@
     "copy": "Copy",
     "copied": "Copied"
   },
+  "Settings": {
+    "title": "Settings",
+    "intro": "Adjust how the site looks and reads.",
+    "language": "Language",
+    "languageHint": "Choose the display language.",
+    "languages": {
+      "en": "English",
+      "th": "ไทย"
+    }
+  },
   "Achievements": {
     "position": "Position",
     "tools": "Tools",
@@ -55,6 +65,7 @@
     "achievements": "Achievements",
     "resume": "Resume",
     "skills": "Skills",
-    "contact": "Contact"
+    "contact": "Contact",
+    "settings": "Settings"
   }
 }

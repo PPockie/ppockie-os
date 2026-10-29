@@ -1,7 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { useLocale, useTranslations } from "next-intl";
+import { routing } from "@/i18n/routing";
+import { useRouter } from "@/i18n/navigation";
+import { SETTINGS_ID } from "@/constants/navbar";
 import AchievementModal from "@/components/window/achievement-modal";
 import FolderTile from "@/components/window/folder-tile";
 import SkillIcon from "@/components/skill-icon";
@@ -18,6 +21,7 @@ import {
   RiFileCopyLine,
   RiGraduationCapFill,
   RiLinksLine,
+  RiTranslate2,
   RiTrophyFill,
 } from "@remixicon/react";
 import { matchSocial } from "@/components/matching-icon-social";
@@ -243,6 +247,73 @@ export const ContactContent = ({ contacts }: { contacts: Contact[] }) => {
       ) : (
         <Empty />
       )}
+    </div>
+  );
+};
+
+const LanguageRow = () => {
+  const t = useTranslations("Settings");
+  const locale = useLocale();
+  const router = useRouter();
+  const [pending, startTransition] = useTransition();
+
+  // The window's own URL is kept so the settings window reopens in the new language.
+  const change = (next: string) => {
+    if (next === locale) return;
+    startTransition(() => router.replace(`/${SETTINGS_ID}`, { locale: next }));
+  };
+
+  return (
+    <li className="flex flex-wrap items-center gap-4 rounded-xl border border-black/10 bg-black/5 p-4 dark:border-white/15 dark:bg-white/5">
+      <span
+        aria-hidden
+        className="grid size-12 shrink-0 place-items-center rounded-xl bg-gray-200 dark:bg-gray-700"
+      >
+        <RiTranslate2 size={24} />
+      </span>
+      <span className="flex min-w-0 flex-1 flex-col items-start">
+        <span className="text-lg font-bold">{t("language")}</span>
+        <span className="text-sm opacity-60">{t("languageHint")}</span>
+      </span>
+      <div role="group" aria-label={t("language")} className="flex shrink-0 gap-2">
+        {routing.locales.map((l) => (
+          <button
+            key={l}
+            type="button"
+            lang={l}
+            aria-pressed={l === locale}
+            disabled={pending}
+            onClick={() => change(l)}
+            className={cn(
+              "cursor-pointer rounded-lg border px-3 py-1.5 text-sm font-bold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-wait",
+              l === locale
+                ? "border-neutral-900 bg-neutral-900 text-neutral-50 dark:border-neutral-50 dark:bg-neutral-50 dark:text-neutral-900"
+                : "border-black/10 hover:bg-black/10 dark:border-white/15 dark:hover:bg-white/10",
+            )}
+          >
+            {t(`languages.${l}`)}
+          </button>
+        ))}
+      </div>
+    </li>
+  );
+};
+
+/** Preferences as rows, the same layout as the contact list. */
+export const SettingsContent = () => {
+  const t = useTranslations("Settings");
+
+  return (
+    <div className="block flex-1 overflow-auto p-6">
+      <div className="flex flex-col items-stretch gap-5 text-left">
+        <div className="flex flex-col items-start gap-1">
+          <h3 className="text-2xl font-bold">{t("title")}</h3>
+          <span className="text-base opacity-70">{t("intro")}</span>
+        </div>
+        <ul className="flex flex-col items-stretch gap-3">
+          <LanguageRow />
+        </ul>
+      </div>
     </div>
   );
 };

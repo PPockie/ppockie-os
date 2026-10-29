@@ -13,6 +13,16 @@
     "copy": "คัดลอก",
     "copied": "คัดลอกแล้ว"
   },
+  "Settings": {
+    "title": "ตั้งค่า",
+    "intro": "ปรับการแสดงผลและภาษาของเว็บไซต์",
+    "language": "ภาษา",
+    "languageHint": "เลือกภาษาที่ใช้แสดงผล",
+    "languages": {
+      "en": "English",
+      "th": "ไทย"
+    }
+  },
   "Achievements": {
     "position": "ตำแหน่ง",
     "tools": "เครื่องมือ",
@@ -55,6 +65,7 @@
     "achievements": "ผลงานและรางวัล",
     "resume": "เรซูเม่",
     "skills": "ทักษะ",
-    "contact": "ติดต่อ"
+    "contact": "ติดต่อ",
+    "settings": "ตั้งค่า"
   }
 }

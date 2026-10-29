@@ -1,6 +1,7 @@
 import {
   RiFileUserFill,
   RiGraduationCapFill,
+  RiSettings3Fill,
   RiUserSmileFill,
 } from "@remixicon/react";
 import { ReactNode } from "react";
@@ -25,6 +26,9 @@ export const EDUCATION_ID = "education";
 
 /** Id of the resume/CV download window. */
 export const RESUME_ID = "resume";
+
+/** Id of the settings window (language, ...). */
+export const SETTINGS_ID = "settings";
 
 /** The contacts quick-linked from the nav; the Contact window lists every contact. */
 export const NAV_CONTACT_PLATFORMS = ["email", "github", "linkedin"];
@@ -73,9 +77,9 @@ export const NAV_POSITIONS = Object.keys(NAVBAR_VARIANT) as NavPosition[];
 const DEFAULT_POSITION: NavPosition = "default";
 
 /**
- * Below `lg` the nav becomes an iOS-style dock pinned to the bottom: three
- * slots (about, education, resume) whatever position is stored. Contact
- * moves to the folder grid there.
+ * Below `lg` the nav becomes an iOS-style dock pinned to the bottom: four
+ * slots (about, education, resume, settings) whatever position is stored.
+ * Contact moves to the folder grid there.
  */
 const DOCK = {
   nav: "max-lg:fixed max-lg:top-auto max-lg:bottom-4 max-lg:left-1/2 max-lg:-translate-x-1/2 max-lg:translate-y-0 max-lg:p-2.5 max-lg:w-[calc(100%-2rem)] md:max-lg:max-w-lg",
@@ -127,3 +131,11 @@ export const NAV_LIST: NavListProps[] = [
   },
 ];
 
+/** Last group in the nav, after the quick-linked contacts. */
+export const NAV_SETTINGS: NavListProps = {
+  id: SETTINGS_ID,
+  name: "Settings",
+  category: "settings",
+  icon: <RiSettings3Fill size={ICON_SIZE} />,
+  windowId: SETTINGS_ID,
+};

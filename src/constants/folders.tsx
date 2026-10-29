@@ -6,7 +6,7 @@ import {
   RiTrophyFill,
 } from "@remixicon/react";
 import type { ReactNode } from "react";
-import { ABOUT_ID, EDUCATION_ID, RESUME_ID } from "@/constants/navbar";
+import { ABOUT_ID, EDUCATION_ID, RESUME_ID, SETTINGS_ID } from "@/constants/navbar";
 
 export interface FolderItem {
   id: string;
@@ -87,5 +87,5 @@ export const FOLDERS: FolderItem[] = [
   },
 ];
 
-/** Every window that has its own URL: the folders plus about and education. */
-export const WINDOW_IDS: string[] = [...FOLDERS.map((f) => f.id), ABOUT_ID, EDUCATION_ID, RESUME_ID];
+/** Every window that has its own URL: the folders plus about, education, resume and settings. */
+export const WINDOW_IDS: string[] = [...FOLDERS.map((f) => f.id), ABOUT_ID, EDUCATION_ID, RESUME_ID, SETTINGS_ID];

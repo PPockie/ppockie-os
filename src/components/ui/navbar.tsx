@@ -7,6 +7,7 @@ import { Fragment, useRef } from "react";
 import {
   NAV_CONTACT_PLATFORMS,
   NAV_LIST,
+  NAV_SETTINGS,
   NAVBAR,
   NAVBAR_VARIANT,
   RESUME_ID,
@@ -46,7 +47,7 @@ interface NavbarProps {
 const Navbar = ({ position, contacts = [] }: NavbarProps) => {
   const quickLinks = contacts.filter((c) => NAV_CONTACT_PLATFORMS.includes(c.platform.trim().toLowerCase()));
   const { open, hasDocuments } = useWindows();
-  const items = [...NAV_LIST.filter((n) => n.windowId !== RESUME_ID || hasDocuments), ...quickLinks.map(toContactItem)];
+  const items = [...NAV_LIST.filter((n) => n.windowId !== RESUME_ID || hasDocuments), ...quickLinks.map(toContactItem), NAV_SETTINGS];
   const { position: stored } = useNavPosition();
   const active = position ?? stored;
   const NAV_VARIANT = NAVBAR_VARIANT[active];
