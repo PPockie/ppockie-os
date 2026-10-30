@@ -11,6 +11,7 @@ import FolderTile from "@/components/window/folder-tile";
 import SkillIcon from "@/components/skill-icon";
 import { cn } from "@/libs/cn";
 import {
+import { formatMonth } from "@/libs/format-month";
   RiArrowRightSLine,
   RiArrowRightUpLine,
   RiAwardFill,
@@ -428,9 +429,6 @@ export const SkillsContent = ({ groups }: { groups: SkillGroup[] }) => (
     )}
   </div>
 );
-
-const formatMonth = (date: string, locale: string) =>
-  new Intl.DateTimeFormat(locale, { month: "short", year: "numeric", timeZone: "UTC" }).format(new Date(date));
 
 interface TimelineEntry {
   id: string;
