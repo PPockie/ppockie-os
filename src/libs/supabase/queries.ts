@@ -132,6 +132,9 @@ export async function getEducation(locale: Locale) {
   }));
 }
 
+// Bare storage paths go through `/files` (see next.config.ts); full URLs and rooted paths are left alone.
+const mediaUrl = (src: string) => (/^(https?:)?\/\/|^\//.test(src) ? src : `/files/${src}`);
+
 export type Project = Awaited<ReturnType<typeof getProjects>>[number];
 
 export async function getProjects(locale: Locale) {
@@ -146,8 +149,8 @@ export async function getProjects(locale: Locale) {
     title: pick(p, "title", locale) as string,
     summary: pick(p, "summary", locale),
     description: pick(p, "description", locale),
-    coverUrl: p.cover_url,
-    images: p.images,
+    coverUrl: p.cover_url && mediaUrl(p.cover_url),
+    images: [...new Set((p.images ?? []).filter(Boolean).map(mediaUrl))],
     techStack: p.tech_stack,
     repoUrl: p.repo_url,
     demoUrl: p.demo_url,
@@ -177,9 +180,8 @@ export async function getAchievements(locale: Locale, kind?: AchievementKind) {
     expiresOn: a.expires_on,
     credentialId: a.credential_id,
     credentialUrl: a.credential_url,
-    imageUrl: a.image_url,
-    // The cover first, then the rest of the gallery without repeating it.
-    images: [...new Set([a.image_url, ...(a.images ?? [])].filter((u): u is string => Boolean(u)))],
+    imageUrl: a.image_url && mediaUrl(a.image_url),
+    images: [...new Set((a.images ?? []).filter(Boolean).map(mediaUrl))],
     tools: a.tools ?? [],
   }));
 }
