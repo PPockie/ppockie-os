@@ -7,11 +7,12 @@ import { useRouter } from "@/i18n/navigation";
 import { NAV_POSITIONS, SETTINGS_ID } from "@/constants/navbar";
 import { useNavPosition } from "@/components/nav/nav-provider";
 import AchievementModal from "@/components/window/achievement-modal";
+import ProjectModal from "@/components/window/project-modal";
 import FolderTile from "@/components/window/folder-tile";
 import SkillIcon from "@/components/skill-icon";
 import { cn } from "@/libs/cn";
-import {
 import { formatMonth } from "@/libs/format-month";
+import {
   RiArrowRightSLine,
   RiArrowRightUpLine,
   RiAwardFill,
@@ -50,21 +51,27 @@ const Empty = () => {
   return <p className="text-sm opacity-60">{tw("empty")}</p>;
 };
 
-export const ProjectsContent = ({ projects }: { projects: Project[] }) => (
-  <div className="block flex-1 overflow-auto p-4">
-    {projects.length ? (
-      <ul className={GRID}>
-        {projects.map((project, i) => (
-          <FolderTile key={project.id} label={project.title} index={i}>
-            {initialsOf(project.title)}
-          </FolderTile>
-        ))}
-      </ul>
-    ) : (
-      <Empty />
-    )}
-  </div>
-);
+export const ProjectsContent = ({ projects }: { projects: Project[] }) => {
+  const [openId, setOpenId] = useState<string | null>(null);
+  const open = projects.find((p) => p.id === openId);
+
+  return (
+    <div className="block flex-1 overflow-auto p-4">
+      {projects.length ? (
+        <ul className={GRID}>
+          {projects.map((project, i) => (
+            <FolderTile key={project.id} label={project.title} index={i} onOpen={() => setOpenId(project.id)}>
+              {initialsOf(project.title)}
+            </FolderTile>
+          ))}
+        </ul>
+      ) : (
+        <Empty />
+      )}
+      {open && <ProjectModal project={open} onClose={() => setOpenId(null)} />}
+    </div>
+  );
+};
 
 const TOOLS_COLLAPSED = 3;
 

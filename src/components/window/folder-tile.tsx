@@ -8,6 +8,8 @@ interface FolderTileProps {
   index: number;
   /** A folder for things that hold more, a file for a single item. */
   shape?: "folder" | "file";
+  /** Makes the tile a button that opens something (a detail modal). */
+  onOpen?: () => void;
   /** Whatever sits on the face: letters, a logo. */
   children: ReactNode;
 }
@@ -71,17 +73,34 @@ const FileShape = ({ tone, children }: { tone: string; children: ReactNode }) =>
 );
 
 /** A folder or file tile in flow, for use inside a window. */
-const FolderTile = ({ label, index, shape = "folder", children }: FolderTileProps) => {
+const FolderTile = ({ label, index, shape = "folder", onOpen, children }: FolderTileProps) => {
   const tone = index % 2 === 0 ? TONE.dark : TONE.light;
   const Shape = shape === "file" ? FileShape : FolderShape;
 
-  return (
-    <li className="group flex flex-col items-center gap-2 rounded-xl border border-transparent px-2 pt-2 pb-3 transition-colors duration-150 hover:border-black/10 hover:bg-black/5 dark:hover:border-white/15 dark:hover:bg-white/10">
+  const body = (
+    <>
       <Shape tone={tone}>{children}</Shape>
 
       <span className="line-clamp-2 text-center text-sm font-medium wrap-anywhere">
         {label}
       </span>
+    </>
+  );
+
+  return (
+    <li className="group rounded-xl border border-transparent transition-colors duration-150 hover:border-black/10 hover:bg-black/5 dark:hover:border-white/15 dark:hover:bg-white/10">
+      {onOpen ? (
+        <button
+          type="button"
+          aria-haspopup="dialog"
+          onClick={onOpen}
+          className="flex w-full cursor-pointer flex-col items-center gap-2 rounded-xl px-2 pt-2 pb-3 focus-visible:outline-2 focus-visible:outline-offset-2"
+        >
+          {body}
+        </button>
+      ) : (
+        <div className="flex-col px-2 pt-2 pb-3">{body}</div>
+      )}
     </li>
   );
 };

@@ -35,7 +35,15 @@
     "tools": "Tools",
     "prevImage": "Previous image",
     "nextImage": "Next image",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
     "image": "Image {n} of {total}"
+  },
+  "Project": {
+    "highlights": "Highlights",
+    "techStack": "Tech stack",
+    "demo": "Live demo",
+    "repo": "Source code"
   },
   "About": {
     "title": "About This PPockie",

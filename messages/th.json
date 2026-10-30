@@ -35,7 +35,15 @@
     "tools": "เครื่องมือ",
     "prevImage": "รูปก่อนหน้า",
     "nextImage": "รูปถัดไป",
+    "zoomIn": "ซูมเข้า",
+    "zoomOut": "ซูมออก",
     "image": "รูปที่ {n} จาก {total}"
+  },
+  "Project": {
+    "highlights": "ผลงานและหน้าที่",
+    "techStack": "เทคโนโลยีที่ใช้",
+    "demo": "ดูตัวอย่างจริง",
+    "repo": "ซอร์สโค้ด"
   },
   "About": {
     "title": "เกี่ยวกับ PPockie เครื่องนี้",
